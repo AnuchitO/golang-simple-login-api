@@ -52,7 +52,7 @@ func NewAPI(router rest.App) (api *rest.Api) {
 		AccessControlMaxAge:           3600,
 	})
 
-	loginMiddle := &middleware.LoginMiddleware{}
+	loginMiddle := &middleware.Login{}
 	api.Use(loginMiddle)
 
 	api.SetApp(router)
