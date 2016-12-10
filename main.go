@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/ant0ine/go-json-rest/rest"
+	"github.com/anuchitprasertsang/golang-login-jwt/login"
 	"github.com/anuchitprasertsang/golang-login-jwt/token"
 )
 
@@ -17,7 +18,7 @@ func main() {
 
 func NewRoute() rest.App {
 	router, err := rest.MakeRouter(
-		rest.Post("/login", Login),
+		rest.Post("/login", login.Login),
 		rest.Get("/users", GetUser),
 	)
 
@@ -57,21 +58,6 @@ func NewAPI(router rest.App) (api *rest.Api) {
 
 	api.SetApp(router)
 	return
-}
-
-func Login(w rest.ResponseWriter, r *rest.Request) {
-	body := map[string]string{}
-
-	err := r.DecodeJsonPayload(&body)
-	if err != nil {
-		w.WriteHeader(400)
-		w.WriteJson(err)
-	}
-
-	response, status := token.CheckAuthorize(body["user"], body["password"])
-
-	w.WriteHeader(status)
-	w.WriteJson(response)
 }
 
 type LoginMiddleware struct {
