@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"encoding/csv"
 	"fmt"
 	"log"
 	"net/http"
@@ -20,7 +18,6 @@ func main() {
 
 func NewRoute() rest.App {
 	router, err := rest.MakeRouter(
-		rest.Post("/", PostCustomer),
 		rest.Post("/login", Login),
 	)
 
@@ -98,45 +95,6 @@ func (login *LoginMiddleware) MiddlewareFunc(handler rest.HandlerFunc) rest.Hand
 		handler(w, r)
 		fmt.Println("after execute handler")
 	}
-}
-
-func PostCustomer(w rest.ResponseWriter, r *rest.Request) {
-	records := []SubscriberTargetDetail{
-		SubscriberTargetDetail{
-			TSCID:        "tscID",
-			CampaignCode: "campaignCode",
-		},
-	}
-
-	bf := &bytes.Buffer{}
-	c := csv.NewWriter(bf)
-	c.Comma = '|'
-
-	for _, obj := range records {
-		var record []string
-		record = append(record, obj.TSCID)
-		record = append(record, obj.CampaignCode)
-		c.Write(record)
-	}
-	c.Flush()
-
-	hw := w.(http.ResponseWriter)
-	hw.Header().Set("Content-type", "text/csv")
-	hw.Header().Set("Content-disposition", "attachment;filename=anuchit.TXT")
-	hw.Write(bf.Bytes())
-}
-
-type SubscriberTargetListDetailResponse struct {
-	List []SubscriberTargetDetail `json:"list"`
-}
-
-type SubscriberTargetDetail struct {
-	ARPU             float64 `bson:"arpu" json:"arpu"`
-	TSCID            string  `bson:"tscID" json:"tscID"`
-	CampaignCode     string  `bson:"campaignCode" json:"campaignCode"`
-	CampaignName     string  `bson:"campaignName" json:"campaignName"`
-	SubscriberNumber string  `bson:"subscriberNumber" json:"subscriberNumber"`
-	CustomerNumber   string  `bson:"customerNumber" json:"customerNumber"`
 }
 
 func CreateToken(user string) string {
