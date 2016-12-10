@@ -68,22 +68,10 @@ func Login(w rest.ResponseWriter, r *rest.Request) {
 		w.WriteJson(err)
 	}
 
-	response, status := checkAuthorize(body["user"], body["password"])
+	response, status := token.CheckAuthorize(body["user"], body["password"])
 
 	w.WriteHeader(status)
 	w.WriteJson(response)
-}
-
-func checkAuthorize(user, passwd string) (map[string]string, int) {
-	resp := map[string]string{}
-
-	if user == "kob@gmail.com" && passwd == "aobaob" {
-		resp["token"] = token.CreateToken(user)
-		return resp, 200
-	}
-
-	resp["error"] = "user or password wrong"
-	return resp, 401
 }
 
 type LoginMiddleware struct {
