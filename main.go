@@ -105,6 +105,8 @@ func (login *LoginMiddleware) MiddlewareFunc(handler rest.HandlerFunc) rest.Hand
 	}
 }
 
+var secret = "team"
+
 func TokenValidator(tokenString string) error {
 
 	token, err := jws.ParseJWT([]byte(tokenString))
@@ -115,7 +117,7 @@ func TokenValidator(tokenString string) error {
 	validator := &jwt.Validator{}
 	validator.SetIssuer("app kob")
 
-	err = token.Validate([]byte("team"), crypto.SigningMethodHS256, validator)
+	err = token.Validate([]byte(secret), crypto.SigningMethodHS256, validator)
 	return err
 }
 
@@ -126,7 +128,6 @@ func CreateToken(user string) string {
 
 	tokenStruct := jws.NewJWT(claims, crypto.SigningMethodHS256)
 
-	secret := "team"
 	serialized, err := tokenStruct.Serialize([]byte(secret))
 	if err != nil {
 		log.Fatal("error : ", err.Error())
