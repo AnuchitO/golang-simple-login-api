@@ -1,12 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/SermoDigital/jose/crypto"
 	"github.com/SermoDigital/jose/jws"
+	"github.com/SermoDigital/jose/jwt"
 	"github.com/ant0ine/go-json-rest/rest"
 )
 
@@ -19,6 +20,7 @@ func main() {
 func NewRoute() rest.App {
 	router, err := rest.MakeRouter(
 		rest.Post("/login", Login),
+		rest.Get("/users", GetUser),
 	)
 
 	if err != nil {
@@ -91,10 +93,30 @@ type LoginMiddleware struct {
 
 func (login *LoginMiddleware) MiddlewareFunc(handler rest.HandlerFunc) rest.HandlerFunc {
 	return func(w rest.ResponseWriter, r *rest.Request) {
-		fmt.Println("before execute handler")
+		if r.URL.Path != "/login" {
+			err := TokenValidator(strings.Replace(r.Header.Get("Authorization"), "Bearer ", "", -1))
+			if err != nil {
+				w.WriteHeader(http.StatusUnauthorized)
+				w.WriteJson(map[string]string{"error": err.Error()})
+				return
+			}
+		}
 		handler(w, r)
-		fmt.Println("after execute handler")
 	}
+}
+
+func TokenValidator(tokenString string) error {
+
+	token, err := jws.ParseJWT([]byte(tokenString))
+	if err != nil {
+		return err
+	}
+
+	validator := &jwt.Validator{}
+	validator.SetIssuer("app kob")
+
+	err = token.Validate([]byte("team"), crypto.SigningMethodHS256, validator)
+	return err
 }
 
 func CreateToken(user string) string {
@@ -113,4 +135,8 @@ func CreateToken(user string) string {
 	token := string(serialized)
 
 	return token
+}
+
+func GetUser(w rest.ResponseWriter, r *rest.Request) {
+	w.WriteJson(map[string]string{"user": "kob@gmail.com"})
 }

@@ -20,3 +20,15 @@
 * Content-Type: `application/json; charset=utf-8`
 * Body: /"token": ".*"/
 
+
+## GET /users
+* Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrb2JAZ21haWwuY29tIiwiaXNzIjoiYXBwIGtvYiJ9.ZjrECc-Y_EjVQ-Ui6-_Qos4Yl5ZJ9Tx-K_IRtj5croQ`
+
+===
+
+### Example response
+
+* Status: `200`
+* Content-Type: `application/json; charset=utf-8`
+* Body: /"user": "kob@gmail.com"/
+
