@@ -32,3 +32,14 @@
 * Content-Type: `application/json; charset=utf-8`
 * Body: /"user": "kob@gmail.com"/
 
+
+## GET /users
+* Authorization: `Bearer bad token`
+
+===
+
+### Example response
+
+* Status: `401`
+* Content-Type: `application/json; charset=utf-8`
+* Body: /"error": "not a compact JWS"/
