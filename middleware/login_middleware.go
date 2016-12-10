@@ -24,3 +24,7 @@ func (login *Login) MiddlewareFunc(handler rest.HandlerFunc) rest.HandlerFunc {
 		handler(w, r)
 	}
 }
+
+func NewLogin() *Login {
+	return &Login{}
+}
