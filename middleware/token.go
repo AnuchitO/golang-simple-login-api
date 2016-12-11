@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/ant0ine/go-json-rest/rest"
-	"github.com/anuchitprasertsang/golang-login-jwt/token"
+	"github.com/anuchitprasertsang/golang-simple-login-api/token"
 )
 
 var TokenStack = []rest.Middleware{

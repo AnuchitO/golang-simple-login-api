@@ -3,7 +3,7 @@ package login
 import (
 	"net/http"
 
-	"github.com/anuchitprasertsang/golang-login-jwt/token"
+	"github.com/anuchitprasertsang/golang-simple-login-api/token"
 )
 
 func CheckAuthenticate(user, passwd string) (map[string]string, int) {

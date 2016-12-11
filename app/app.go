@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/ant0ine/go-json-rest/rest"
-	"github.com/anuchitprasertsang/golang-login-jwt/middleware"
+	"github.com/anuchitprasertsang/golang-simple-login-api/middleware"
 )
 
 func NewAPI(router rest.App) (api *rest.Api) {

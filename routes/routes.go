@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/ant0ine/go-json-rest/rest"
-	"github.com/anuchitprasertsang/golang-login-jwt/customers"
-	"github.com/anuchitprasertsang/golang-login-jwt/login"
+	"github.com/anuchitprasertsang/golang-simple-login-api/customers"
+	"github.com/anuchitprasertsang/golang-simple-login-api/login"
 )
 
 func New() rest.App {
