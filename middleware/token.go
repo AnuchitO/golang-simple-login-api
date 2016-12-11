@@ -8,14 +8,14 @@ import (
 	"github.com/anuchitprasertsang/golang-login-jwt/token"
 )
 
-var LoginStack = []rest.Middleware{
-	&Login{},
+var TokenStack = []rest.Middleware{
+	&Token{},
 }
 
-type Login struct {
+type Token struct {
 }
 
-func (login *Login) MiddlewareFunc(handler rest.HandlerFunc) rest.HandlerFunc {
+func (t *Token) MiddlewareFunc(handler rest.HandlerFunc) rest.HandlerFunc {
 	return func(w rest.ResponseWriter, r *rest.Request) {
 		if r.URL.Path != "/login" {
 			err := token.TokenValidator(strings.Replace(r.Header.Get("Authorization"), "Bearer ", "", -1))
