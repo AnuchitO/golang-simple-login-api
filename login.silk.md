@@ -18,7 +18,7 @@
 
 * Status: `200`
 * Content-Type: `application/json; charset=utf-8`
-* Body: /"token": ".*"/
+* Body: /"token":".*"/
 
 
 ## GET /users
@@ -30,7 +30,7 @@
 
 * Status: `200`
 * Content-Type: `application/json; charset=utf-8`
-* Body: /"user": "kob@gmail.com"/
+* Body: /"user":"kob@gmail.com"/
 
 
 ## GET /users
@@ -42,4 +42,4 @@
 
 * Status: `401`
 * Content-Type: `application/json; charset=utf-8`
-* Body: /"error": "not a compact JWS"/
+* Body: /"error":"not a compact JWS"/
