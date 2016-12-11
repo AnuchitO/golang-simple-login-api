@@ -4,12 +4,13 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/anuchitprasertsang/golang-login-jwt/app"
 	"github.com/anuchitprasertsang/golang-login-jwt/routes"
 	"github.com/matryer/silk/runner"
 )
 
 func TestAPIenpointLogin(t *testing.T) {
-	api := NewAPI(routes.New())
+	api := app.NewAPI(routes.New())
 	s := httptest.NewServer(api.MakeHandler())
 	defer s.Close()
 
