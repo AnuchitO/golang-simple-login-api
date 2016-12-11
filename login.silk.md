@@ -21,7 +21,7 @@
 * Body: /"token":".*"/
 
 
-## GET /users
+## GET /customers
 * Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrb2JAZ21haWwuY29tIiwiaXNzIjoiYXBwIGtvYiJ9.ZjrECc-Y_EjVQ-Ui6-_Qos4Yl5ZJ9Tx-K_IRtj5croQ`
 
 ===
@@ -30,10 +30,10 @@
 
 * Status: `200`
 * Content-Type: `application/json; charset=utf-8`
-* Body: /"user":"kob@gmail.com"/
+* Body: /["apichat","anuchit","wuttinun"]/
 
 
-## GET /users
+## GET /customers
 * Authorization: `Bearer bad token`
 
 ===

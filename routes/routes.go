@@ -4,13 +4,14 @@ import (
 	"log"
 
 	"github.com/ant0ine/go-json-rest/rest"
+	"github.com/anuchitprasertsang/golang-login-jwt/customer"
 	"github.com/anuchitprasertsang/golang-login-jwt/login"
 )
 
 func New() rest.App {
 	router, err := rest.MakeRouter(
 		rest.Post("/login", login.Login),
-		rest.Get("/users", GetUser),
+		rest.Get("/customers", customer.CustomerAPI),
 	)
 
 	if err != nil {
@@ -18,8 +19,4 @@ func New() rest.App {
 	}
 
 	return router
-}
-
-func GetUser(w rest.ResponseWriter, r *rest.Request) {
-	w.WriteJson(map[string]string{"user": "kob@gmail.com"})
 }
