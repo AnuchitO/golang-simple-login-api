@@ -5,26 +5,14 @@ import (
 	"net/http"
 
 	"github.com/ant0ine/go-json-rest/rest"
-	"github.com/anuchitprasertsang/golang-login-jwt/login"
 	"github.com/anuchitprasertsang/golang-login-jwt/middleware"
+	"github.com/anuchitprasertsang/golang-login-jwt/routes"
 )
 
 func main() {
-	api := NewAPI(NewRoute())
+	api := NewAPI(routes.New())
 
 	log.Fatal(http.ListenAndServe(":8081", api.MakeHandler()))
-}
-
-func NewRoute() rest.App {
-	router, err := rest.MakeRouter(
-		rest.Post("/login", login.Login),
-		rest.Get("/users", GetUser),
-	)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	return router
 }
 
 func NewAPI(router rest.App) (api *rest.Api) {
@@ -56,8 +44,4 @@ func NewAPI(router rest.App) (api *rest.Api) {
 
 	api.SetApp(router)
 	return
-}
-
-func GetUser(w rest.ResponseWriter, r *rest.Request) {
-	w.WriteJson(map[string]string{"user": "kob@gmail.com"})
 }
