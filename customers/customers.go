@@ -1,4 +1,4 @@
-package customer
+package customers
 
 import "github.com/ant0ine/go-json-rest/rest"
 
