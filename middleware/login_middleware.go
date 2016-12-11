@@ -8,6 +8,10 @@ import (
 	"github.com/anuchitprasertsang/golang-login-jwt/token"
 )
 
+var LoginStack = []rest.Middleware{
+	&Login{},
+}
+
 type Login struct {
 }
 
@@ -23,8 +27,4 @@ func (login *Login) MiddlewareFunc(handler rest.HandlerFunc) rest.HandlerFunc {
 		}
 		handler(w, r)
 	}
-}
-
-func NewLogin() *Login {
-	return &Login{}
 }
