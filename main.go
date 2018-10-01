@@ -38,6 +38,7 @@ func NewAPI(router rest.App) (api *rest.Api) {
 		"Accept",
 		"Authorization",
 		"X-Real-IP",
+		"X-Forwarded-For",
 		"Content-Type",
 		"X-Custom-Header",
 		"Language",
